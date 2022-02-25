@@ -35,22 +35,6 @@ public class UserManager {
         }
     }
 
-    public void updateUser(User user) {
-        try {
-            Statement statement = connection.createStatement();
-            String query = String.format("UPDATE user SET name = " +
-                            "'%s', surname = '%s', email='%s',password='%s'," +
-                            "region='%s',gender='%s' WHERE id=" + user.getId(),
-                    user.getName(), user.getSurname(), user.getEmail(), user.getPassword(),
-                    user.getGender());
-            System.out.println(query);
-            statement.executeUpdate(query);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
-
-
     public List<User> getUsers() {
         String sql = "SELECT * FROM  user ";
         List<User> users = new ArrayList<>();
@@ -75,32 +59,6 @@ public class UserManager {
         return users;
     }
 
-
-    public List<User> getAllUsers() {
-        String sql = "SELECT * FROM  user ";
-        List<User> users = new ArrayList<>();
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                User user = User.builder()
-                        .id(resultSet.getInt(1))
-                        .name(resultSet.getString(2))
-                        .surname(resultSet.getString(3))
-                        .email(resultSet.getString(4))
-                        .password(resultSet.getString(5))
-                        .gender(resultSet.getString(6))
-
-                        .build();
-                users.add(user);
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return users;
-    }
-
-
     public User getUserByEmailAndPassword(String email, String password) {
         String sql = "SELECT * FROM user WHERE email='" + email + "' and password = '" + password + "'";
         try {
@@ -122,36 +80,5 @@ public class UserManager {
         return null;
     }
 
-    public void deleteUser(int id) {
-        String sql = "DELETE from user where id = " + id;
-        try {
-            Statement statement = connection.createStatement();
-            statement.executeUpdate(sql);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
-
-    public User getUserById(int id) {
-        String sql = "SELECT * FROM user WHERE id=" + id;
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
-            if (resultSet.next()) {
-                return User.builder()
-                        .id(resultSet.getInt(1))
-                        .name(resultSet.getString(2))
-                        .surname(resultSet.getString(3))
-                        .email(resultSet.getString(4))
-                        .password(resultSet.getString(5))
-                        .gender(resultSet.getString(7))
-                        .build();
-
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return null;
-    }
 }
 
