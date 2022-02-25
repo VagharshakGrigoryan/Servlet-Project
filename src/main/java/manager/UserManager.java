@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserManager {
-    private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
     private final Connection connection = DBConnectionProvider.getProvider().getConnection();
 
     public void addUser(User user) {
