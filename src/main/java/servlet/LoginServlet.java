@@ -20,7 +20,6 @@ public class LoginServlet extends HttpServlet {
         req.getRequestDispatcher("login.jsp").forward(req, resp);
 
     }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email");
@@ -31,7 +30,7 @@ public class LoginServlet extends HttpServlet {
         if (user != null) {
             req.setAttribute("user", user);
             req.setAttribute("allUsers",allusers);
-            req.getRequestDispatcher("addUser.jsp").forward(req, resp);
+            req.getRequestDispatcher("home.jsp").forward(req, resp);
 
         }else {
             req.setAttribute("msg", "email or password invaled");
