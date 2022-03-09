@@ -1,3 +1,4 @@
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page import="java.util.List" %>
 <%@ page import="model.User" %>
@@ -16,6 +17,7 @@
 <%
         session.removeAttribute("mesege");
     }%>
+
 
 <% List<User> users = (List<User>) request.getAttribute("user");%>
 
@@ -44,8 +46,10 @@
 
     </div>
 </h1>
-<a href="${pageContext.request.contextPath}/logout">Logout</a>
 
+<a href='<c:url value="/logout" />'>
+    <button class="btn btn-primary">LOGOUT</button>
+</a>
 <br>
 </body>
 </html>

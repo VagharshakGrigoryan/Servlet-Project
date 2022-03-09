@@ -1,5 +1,6 @@
 <%@ page import="model.User" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
 <html>
 <head>
@@ -11,7 +12,8 @@
 
 <body>
 <div id="top">
-    <form method="Post" action="${pageContext.request.contextPath}/register">
+
+    <form method="Post" action='<c:url value="/register" />'>
 
         <div class="form-group">
             <label>Name</label>
@@ -55,6 +57,20 @@
                     </label>
                 </td>
             </tr>
+
+        <tr>
+            <td>
+                type:
+            </td>
+            <td>
+                <label>
+                    <select name="type">
+                        <option>ADMIN</option>
+                        <option>USER</option>
+                    </select>
+                </label>
+            </td>
+        </tr>
 
         <tr>
                 <td>

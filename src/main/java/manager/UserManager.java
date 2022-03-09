@@ -2,10 +2,8 @@ package manager;
 
 import db.DBConnectionProvider;
 import model.User;
-import model.UserType;
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,15 +12,14 @@ public class UserManager {
 
     public void addUser(User user) {
         try {
-            String query = "INSERT INTO user (name,surname,email,password,gender,type) " +
-                    "VALUES(?,?,?,?,?,?);";
+            String query = "INSERT INTO user (name,surname,email,password,gender) " +
+                    "VALUES(?,?,?,?,?);";
             PreparedStatement pStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             pStatement.setString(1, user.getName());
             pStatement.setString(2, user.getSurname());
             pStatement.setString(3, user.getEmail());
             pStatement.setString(4, user.getPassword());
             pStatement.setString(5, user.getGender());
-            pStatement.setString(6, user.getUserType().name());
 
             System.out.println(query);
             pStatement.executeUpdate();
@@ -50,7 +47,6 @@ public class UserManager {
                         .email(resultSet.getString(4))
                         .password(resultSet.getString(5))
                         .gender(resultSet.getString(6))
-                        .userType(UserType.valueOf(resultSet.getString("type")))
                         .build();
                 users.add(user);
             }
@@ -73,7 +69,6 @@ public class UserManager {
                         .email(resultSet.getString(4))
                         .password(resultSet.getString(5))
                         .gender(resultSet.getString(6))
-                        .userType(UserType.valueOf(resultSet.getString("type")))
 
                         .build();
             }

@@ -1,7 +1,6 @@
 package filter;
 
 import model.User;
-import model.UserType;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -22,7 +21,7 @@ public class UserAuthFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpSession session = ((HttpServletRequest) request).getSession();
         User user = (User) session.getAttribute("user");
-        if (user == null || user.getUserType() != UserType.USER) {
+        if (user == null || user.getId() != user.getId()) {
             HttpServletResponse responses = (HttpServletResponse) response;
             responses.sendRedirect("/index.jsp");
         } else {

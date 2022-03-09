@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
@@ -14,8 +16,7 @@
 <h3>
     <div style="text-align: center ">
             <br><br>
-            <a href="${pageContext.request.contextPath}/addUser">
-
+        <a href='<c:url value="/addUser" />'>
                 <button class="btn btn-primary">show my page</button>
             </a></div></h3>
 </body>
