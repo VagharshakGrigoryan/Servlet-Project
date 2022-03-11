@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -10,12 +10,13 @@
 
 <body>
 
-<% String msg = (String) session.getAttribute("msg");%>
-<% if (msg != null && !"".equals(msg)) { %>
-<span><%=msg%></span>
-<%
-        session.removeAttribute("msg");
-    }%>
+<% String msg = (String) session.getAttribute("msg");
+    request.setAttribute("msg", msg);
+%>
+<c:if test="${msg != null }">
+    <span><%=msg%></span>
+</c:if>
+
 <div style="text-align: -webkit-center">
     <a href='<c:url value="/login" />'>
 

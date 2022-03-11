@@ -1,4 +1,4 @@
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page import="java.util.List" %>
 <%@ page import="model.User" %>
@@ -11,15 +11,22 @@
     <title>Us</title>
 </head>
 <body>
-<% String mesege = (String) session.getAttribute("msg");%>
-<% if (mesege != null && !"".equals(mesege)) { %>
-<span><%=mesege%></span>
-<%
-        session.removeAttribute("mesege");
-    }%>
+
+<% String mesege = (String) session.getAttribute("msg");
+    request.setAttribute("msg", mesege);%>
 
 
-<% List<User> users = (List<User>) request.getAttribute("user");%>
+<c:if test="${msg != null}">
+    <span><%=mesege%></span>
+</c:if>
+<c:if test="${msg.equals(msg)}">
+    <span><%=mesege%></span>
+</c:if>
+
+
+<% List<User> users = (List<User>) request.getAttribute("user");
+request.setAttribute("user",users);
+%>
 
 
 <h1>
@@ -31,17 +38,17 @@
                 <th>Name</th>
                 <th>Surname</th>
             </tr>
-            <% if (users != null && !users.isEmpty()) {
-                for (User user : users) {
-            %>
-            <tr>
-                <td><%=user.getName()%>
-                </td>
-                <td><%=user.getSurname()%>
-                </td>
-            </tr>
-            <% }
-            }%>
+
+            <c:forEach var="user" items="${user}">
+                <c:if test="${user != null}">
+                </c:if>
+
+                <tr>
+                    <td><c:out value="${user.name}" /></td>
+                    <td><c:out value="${user.surname}" /></td>
+                </tr>
+            </c:forEach>
+            
         </table>
 
     </div>
